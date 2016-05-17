@@ -93,6 +93,7 @@
 			} else {
 				this.dropdown.addClass('hide');
 			}
+			this.element.trigger('tabdrop.layout.complete');
 		}
 	};
 
