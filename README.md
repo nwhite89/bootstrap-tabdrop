@@ -59,17 +59,23 @@ Checks if the tabs fit in one single row.
 tabdrop.layout.complete
 ```
 
-Triggered when the DOM updates are complete. This can be used to manually initialize bootstrap components inside the droodown.
+Triggered when the DOM updates are complete. This can be used to manually initialize the dropdown and the contained tabs.
 
 ```js
-function initTab() {
+
+$('.nav-tabs').tabdrop().on('tabdrop.layout.complete', function () {
+  
+  // initialize dropdown
   $('.dropdown-toggle').dropdown();
+
+  // initialize items
   $('.dropdown-menu a[data-toggle="tab"]').click(function (e) {
     e.stopPropagation();
     e.preventDefault();
     $(this).tab('show');
   });
-}
-$('.nav-tabs').tabdrop({text:'<span>weitere</span>'}).on('tabdrop.layout.complete', initTab);
+
+});
 
 ```
+
