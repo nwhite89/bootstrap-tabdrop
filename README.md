@@ -52,3 +52,24 @@ Initializes an tab drop.
 ```
 
 Checks if the tabs fit in one single row.
+
+### Event
+
+```
+tabdrop.layout.complete
+```
+
+Triggered when the DOM updates are complete. This can be used to manually initialize bootstrap components inside the droodown.
+
+```js
+function initTab() {
+  $('.dropdown-toggle').dropdown();
+  $('.dropdown-menu a[data-toggle="tab"]').click(function (e) {
+    e.stopPropagation();
+    e.preventDefault();
+    $(this).tab('show');
+  });
+}
+$('.nav-tabs').tabdrop({text:'<span>weitere</span>'}).on('tabdrop.layout.complete', initTab);
+
+```
