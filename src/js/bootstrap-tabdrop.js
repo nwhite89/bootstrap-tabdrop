@@ -68,17 +68,29 @@
 		constructor: TabDrop,
 
 		layout: function() {
-			var collection = [];
-			this.dropdown.removeClass('hide');
+			var collection = [], needed = false;
+			this.dropdown.addClass('hide');
 			this.element
 				.append(this.dropdown.find('li'))
 				.find('>li')
 				.not('.tabdrop')
 				.each(function(){
 					if(this.offsetTop > 0) {
-						collection.push(this);
+						needed = true;
+						return false;
 					}
 				});
+			if (needed) {
+				this.dropdown.removeClass('hide');
+				this.element
+					.find('>li')
+					.not('.tabdrop')
+					.each(function(){
+						if(this.offsetTop > 0) {
+							collection.push(this);
+						}
+					});
+			}
 			if (collection.length > 0) {
 				collection = $(collection);
 				this.dropdown
@@ -90,9 +102,8 @@
 				} else {
 					this.dropdown.removeClass('active');
 				}
-			} else {
-				this.dropdown.addClass('hide');
 			}
+			this.element.trigger('tabdrop.layout.complete');
 		}
 	};
 

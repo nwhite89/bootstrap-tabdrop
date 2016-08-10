@@ -52,3 +52,30 @@ Initializes an tab drop.
 ```
 
 Checks if the tabs fit in one single row.
+
+### Event
+
+```
+tabdrop.layout.complete
+```
+
+Triggered when the DOM updates are complete. This can be used to manually initialize the dropdown and the contained tabs.
+
+```js
+
+$('.nav-tabs').tabdrop().on('tabdrop.layout.complete', function () {
+  
+  // initialize dropdown
+  $('.dropdown-toggle').dropdown();
+
+  // initialize items
+  $('.dropdown-menu a[data-toggle="tab"]').click(function (e) {
+    e.stopPropagation();
+    e.preventDefault();
+    $(this).tab('show');
+  });
+
+});
+
+```
+
